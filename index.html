@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TireWatch — 輪胎價格監控</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+:root,[data-theme="light"]{
+  --bg:#f7f6f2;--surface:#f9f8f5;--surface-2:#fbfbf9;--surface-off:#f0ede8;--surface-dyn:#e6e4df;
+  --divider:#dcd9d5;--border:#d4d1ca;
+  --text:#28251d;--muted:#7a7974;--faint:#bab9b4;
+  --primary:#01696f;--primary-h:#0c4e54;--primary-hl:#cedcd8;
+  --success:#437a22;--success-h:#2e5c10;--success-hl:#d4dfcc;
+  --err:#a13544;--err-hl:#dececb;
+  --gold:#d19900;--gold-hl:#e9e0c6;
+  --orange:#da7101;--orange-hl:#e7d7c4;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:0 4px 12px rgba(0,0,0,.08);
+  --shadow-lg:0 12px 32px rgba(0,0,0,.12);
+  --r-sm:.375rem;--r-md:.5rem;--r-lg:.75rem;--r-xl:1rem;--r-full:9999px;
+  --tr:180ms cubic-bezier(.16,1,.3,1);
+  --xs:.75rem;--sm:.875rem;--base:1rem;--lg:1.25rem;--xl:1.75rem;
+  --font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+[data-theme="dark"]{
+  --bg:#0f1011;--surface:#161718;--surface-2:#1c1d1f;--surface-off:#1a1b1d;--surface-dyn:#252628;
+  --divider:#262728;--border:#323436;
+  --text:#e8e6e3;--muted:#888582;--faint:#555350;
+  --primary:#4f98a3;--primary-h:#3a8290;--primary-hl:#1e3337;
+  --success:#6daa45;--success-h:#558a33;--success-hl:#1e2e18;
+  --err:#dd6974;--err-hl:#2e1a1e;
+  --gold:#e8af34;--gold-hl:#2e2310;
+  --orange:#fdab43;--orange-hl:#2e1e0c;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.3);
+  --shadow-md:0 4px 12px rgba(0,0,0,.4);
+  --shadow-lg:0 12px 32px rgba(0,0,0,.5);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{min-height:100dvh;font-family:var(--font);font-size:var(--sm);color:var(--text);background:var(--bg);line-height:1.5}
+button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
+input,select{font:inherit;color:inherit}
+table{border-collapse:collapse;width:100%}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:var(--r-sm)}
+
+.app{display:flex;min-height:100dvh}
+
+/* ── Sidebar ── */
+.sidebar{
+  width:228px;flex-shrink:0;background:var(--surface);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:sticky;top:0;height:100dvh;overflow-y:auto;
+  transition:left var(--tr)
+}
+.sb-head{padding:1.25rem 1rem 1rem;border-bottom:1px solid var(--divider);display:flex;align-items:center;gap:.75rem}
+.sb-logo{width:30px;height:30px;flex-shrink:0}
+.sb-name{font-size:var(--sm);font-weight:700;letter-spacing:-.02em}
+.sb-sub{font-size:var(--xs);color:var(--muted);margin-top:1px}
+.sb-nav{padding:.5rem .5rem;flex:1}
+.nav-sec{font-size:10px;font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.08em;padding:.75rem .5rem .25rem}
+.nav-item{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.45rem .75rem;border-radius:var(--r-md);
+  font-size:var(--sm);color:var(--muted);cursor:pointer;
+  transition:background var(--tr),color var(--tr);
+  margin-bottom:2px;border:none;background:none;width:100%;text-align:left
+}
+.nav-item:hover{background:var(--surface-off);color:var(--text)}
+.nav-item.active{background:var(--primary-hl);color:var(--primary);font-weight:500}
+.nav-item i{width:15px;height:15px;flex-shrink:0}
+.sb-foot{padding:.75rem 1rem;border-top:1px solid var(--divider);display:flex;gap:.5rem}
+.ib{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:var(--r-md);color:var(--muted);transition:background var(--tr),color var(--tr)}
+.ib:hover{background:var(--surface-off);color:var(--text)}
+
+/* ── Main ── */
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(15,16,17,.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--divider);
+  padding:.75rem 1.5rem;display:flex;align-items:center;gap:1rem
+}
+[data-theme="light"] .topbar{background:rgba(247,246,242,.85)}
+.tb-title{font-size:var(--base);font-weight:600;letter-spacing:-.01em;flex:1}
+.tb-right{display:flex;align-items:center;gap:.5rem}
+.page{padding:1.5rem;max-width:1500px;margin:0 auto;width:100%}
+
+/* ── KPI ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(190px,100%),1fr));gap:1rem;margin-bottom:1.5rem}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.25rem;box-shadow:var(--shadow-sm)}
+.kpi-lbl{font-size:var(--xs);color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
+.kpi-val{font-size:var(--xl);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em;margin-bottom:.25rem}
+.kpi-sub{font-size:var(--xs);color:var(--muted);display:flex;align-items:center;gap:4px}
+.kpi-sub.dn{color:var(--success)} .kpi-sub.up{color:var(--err)}
+
+/* ── Toolbar ── */
+.toolbar{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.sw{display:flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:.45rem .75rem;flex:1;min-width:180px}
+.sw input{background:none;border:none;outline:none;font-size:var(--sm);width:100%}
+.sw input::placeholder{color:var(--faint)}
+.sw i{color:var(--faint);width:13px;height:13px;flex-shrink:0}
+.fsel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:.45rem .75rem;font-size:var(--sm);cursor:pointer}
+.fsel:hover{border-color:var(--primary)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1rem;border-radius:var(--r-md);font-size:var(--sm);font-weight:500;cursor:pointer;border:none;transition:background var(--tr),box-shadow var(--tr)}
+.btn-p{background:var(--primary);color:#fff} .btn-p:hover{background:var(--primary-h)}
+.btn-s{background:var(--surface);border:1px solid var(--border);color:var(--text)} .btn-s:hover{background:var(--surface-off)}
+.btn i{width:13px;height:13px}
+
+/* ── Card ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);margin-bottom:1.5rem;box-shadow:var(--shadow-sm);overflow:hidden}
+.card-head{padding:1rem 1.25rem;border-bottom:1px solid var(--divider);display:flex;align-items:center;gap:.75rem}
+.card-title{font-size:var(--sm);font-weight:600;flex:1}
+.card-meta{font-size:var(--xs);color:var(--muted)}
+
+/* ── Table ── */
+.tw{overflow-x:auto}
+thead th{padding:.6rem 1rem;text-align:left;font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;background:var(--surface-off);border-bottom:1px solid var(--divider);white-space:nowrap}
+tbody tr{border-bottom:1px solid rgba(128,128,128,.07);transition:background var(--tr)}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:rgba(79,152,163,.06)}
+tbody td{padding:.65rem 1rem;font-size:var(--sm);font-variant-numeric:tabular-nums;vertical-align:middle}
+
+/* ── Platform legend ── */
+.legend{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;padding:.75rem 1.25rem;border-bottom:1px solid var(--divider);font-size:var(--xs);color:var(--muted)}
+.leg-item{display:flex;align-items:center;gap:5px}
+.dot{width:7px;height:7px;border-radius:var(--r-full);flex-shrink:0;display:inline-block}
+
+/* ── Price link ── */
+.pl{display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:var(--r-sm);transition:background var(--tr),color var(--tr);cursor:pointer;white-space:nowrap}
+.pl:hover{background:var(--primary-hl);color:var(--primary)}
+.pl.best{color:var(--success);font-weight:700} .pl.best:hover{background:var(--success-hl)}
+.pl.high{color:var(--err)} .pl.high:hover{background:var(--err-hl)}
+.pl i{width:9px;height:9px;opacity:.5;flex-shrink:0}
+.p-na{color:var(--faint);font-style:italic}
+
+/* ── Badge ── */
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:var(--r-full);font-size:10px;font-weight:600}
+.b-g{background:var(--success-hl);color:var(--success)}
+.b-r{background:var(--err-hl);color:var(--err)}
+.b-y{background:var(--gold-hl);color:var(--gold)}
+.b-bl{background:var(--primary-hl);color:var(--primary)}
+.b-gr{background:var(--surface-dyn);color:var(--muted)}
+
+/* ── Trend ── */
+.trend{display:flex;align-items:center;gap:3px;font-size:var(--xs)}
+.trend.dn{color:var(--success)} .trend.up{color:var(--err)} .trend.fl{color:var(--faint)}
+
+/* ── Alert strip ── */
+.astrip{display:flex;align-items:center;gap:.75rem;padding:.6rem 1.25rem;background:rgba(232,175,52,.08);border-bottom:1px solid rgba(232,175,52,.2);font-size:var(--xs);color:var(--muted)}
+.astrip i{color:var(--gold);width:13px;height:13px;flex-shrink:0}
+.astrip strong{color:var(--text)}
+
+/* ── Live dot ── */
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.live{width:7px;height:7px;border-radius:var(--r-full);background:var(--success);animation:pulse 2s ease-in-out infinite;display:inline-block;flex-shrink:0}
+
+/* ── Modal ── */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity var(--tr)}
+.ov.open{opacity:1;pointer-events:auto}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:1.5rem;width:100%;max-width:480px;max-height:85dvh;overflow-y:auto;box-shadow:var(--shadow-lg);transform:translateY(10px);transition:transform var(--tr)}
+.ov.open .modal{transform:translateY(0)}
+.m-title{font-size:var(--base);font-weight:600;margin-bottom:1.25rem;display:flex;justify-content:space-between;align-items:center}
+.fg{margin-bottom:1rem}
+.flbl{font-size:var(--xs);font-weight:500;color:var(--muted);margin-bottom:.25rem;display:block;text-transform:uppercase;letter-spacing:.05em}
+.fi{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md);padding:.45rem .75rem;font-size:var(--sm);transition:border-color var(--tr)}
+.fi:focus{outline:none;border-color:var(--primary)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.m-act{display:flex;justify-content:flex-end;gap:.5rem;margin-top:1.25rem}
+
+/* ── Toast ── */
+.tw2{position:fixed;bottom:1.5rem;right:1.5rem;z-index:2000;display:flex;flex-direction:column;gap:.5rem}
+.toast{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-lg);padding:.6rem 1rem;font-size:var(--sm);box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:.5rem;max-width:280px;animation:tin .2s ease}
+@keyframes tin{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.toast i{width:13px;height:13px;flex-shrink:0}
+.toast.ok i{color:var(--success)} .toast.info i{color:var(--primary)}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  .sidebar{position:fixed;left:-228px;z-index:200;height:100dvh;transition:left var(--tr)}
+  .sidebar.open{left:0}
+  .page{padding:1rem}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .topbar{padding:.6rem 1rem}
+  #menu-btn{display:flex!important}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<nav class="sidebar" id="sidebar">
+  <div class="sb-head">
+    <svg class="sb-logo" viewBox="0 0 30 30" fill="none">
+      <circle cx="15" cy="15" r="13" stroke="currentColor" stroke-width="1.5" opacity=".2"/>
+      <circle cx="15" cy="15" r="8.5" stroke="var(--primary)" stroke-width="2.2"/>
+      <circle cx="15" cy="15" r="3" fill="var(--primary)"/>
+      <line x1="15" y1="6.5" x2="15" y2="4" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="15" y1="24" x2="15" y2="26" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="6.5" y1="15" x2="4" y2="15" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="24" y1="15" x2="26" y2="15" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <div class="sb-name">TireWatch</div>
+      <div class="sb-sub">輪胎價格監控</div>
+    </div>
+  </div>
+  <div class="sb-nav">
+    <div class="nav-sec">主要功能</div>
+    <button class="nav-item active" onclick="go('dashboard',this)"><i data-lucide="layout-dashboard"></i>價格總覽</button>
+    <button class="nav-item" onclick="go('alerts',this)"><i data-lucide="bell"></i>價格警報<span class="badge b-r" id="abadge" style="margin-left:auto;font-size:9px;display:none">0</span></button>
+    <button class="nav-item" onclick="go('history',this)"><i data-lucide="line-chart"></i>歷史趨勢</button>
+    <button class="nav-item" onclick="go('compare',this)"><i data-lucide="bar-chart-2"></i>平台比較</button>
+    <div class="nav-sec">管理</div>
+    <button class="nav-item" onclick="go('tires',this)"><i data-lucide="circle-dot"></i>輪胎管理</button>
+    <button class="nav-item" onclick="go('schedule',this)"><i data-lucide="clock"></i>更新排程</button>
+  </div>
+  <div class="sb-foot">
+    <button class="ib" onclick="toggleTheme()" title="切換主題"><i data-lucide="moon" id="ti"></i></button>
+    <button class="ib" onclick="doUpdate()" title="立即更新"><i data-lucide="refresh-cw" id="ri"></i></button>
+    <button class="ib" onclick="openM('addModal')" title="新增輪胎"><i data-lucide="plus"></i></button>
+  </div>
+</nav>
+
+<div class="main">
+  <header class="topbar">
+    <button class="ib" id="menu-btn" onclick="toggleSB()" style="display:none"><i data-lucide="menu"></i></button>
+    <div class="tb-title" id="ptitle">價格總覽</div>
+    <div class="tb-right">
+      <span class="live" title="監控中"></span>
+      <span style="font-size:var(--xs);color:var(--muted);margin-left:4px" id="upd">最後更新：載入中…</span>
+      <button class="btn btn-p" style="margin-left:.75rem" onclick="openM('addModal')"><i data-lucide="plus"></i>新增輪胎</button>
+    </div>
+  </header>
+  <main>
+
+    <div class="astrip" id="astrip" style="display:none">
+      <i data-lucide="zap"></i>
+      <span id="astrip-txt"></span>
+      <button onclick="this.parentElement.style.display='none'" style="margin-left:auto;color:var(--faint);font-size:18px;line-height:1">×</button>
+    </div>
+
+    <div class="page" id="page-dashboard">
+      <div class="kpi-grid" id="kpis"></div>
+      <div class="toolbar">
+        <div class="sw"><i data-lucide="search"></i><input type="text" placeholder="搜尋品牌、型號、尺寸…" id="qi" oninput="filterRows()"></div>
+        <select class="fsel" id="bf" onchange="filterRows()">
+          <option value="">所有品牌</option>
+          <option>Michelin</option><option>Bridgestone</option><option>Continental</option>
+          <option>Yokohama</option><option>Pirelli</option><option>Dunlop</option><option>Toyo</option>
+        </select>
+        <select class="fsel" id="szf" onchange="filterRows()"><option value="">所有尺寸</option></select>
+        <button class="btn btn-s" onclick="exportCSV()"><i data-lucide="download"></i>匯出 CSV</button>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <i data-lucide="table-2" style="width:15px;height:15px;color:var(--primary);flex-shrink:0"></i>
+          <span class="card-title">六平台即時比價</span>
+          <span class="card-meta" id="rowct">—</span>
+        </div>
+        <div class="legend" id="legend"></div>
+        <div class="tw">
+          <table>
+            <thead><tr>
+              <th onclick="sortBy('brand')" style="cursor:pointer">品牌 / 型號 ↕</th>
+              <th>尺寸</th>
+              <th><div class="leg-item"><span class="dot" style="background:#e85d04"></span>PChome</div></th>
+              <th><div class="leg-item"><span class="dot" style="background:#ee4d2d"></span>蝦皮</div></th>
+              <th><div class="leg-item"><span class="dot" style="background:#720e9e"></span>Yahoo</div></th>
+              <th><div class="leg-item"><span class="dot" style="background:#e8750a"></span>露天</div></th>
+              <th><div class="leg-item"><span class="dot" style="background:#1e6fcc"></span>小李輪胎</div></th>
+              <th><div class="leg-item"><span class="dot" style="background:#22a44e"></span>台中輪胎館</div></th>
+              <th>最低價</th>
+              <th>趨勢</th>
+              <th></th>
+            </tr></thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="page-alerts" style="display:none">
+      <div class="card">
+        <div class="card-head">
+          <i data-lucide="bell" style="width:15px;height:15px;color:var(--gold);flex-shrink:0"></i>
+          <span class="card-title">價格警報</span>
+          <button class="btn btn-p" onclick="openM('alertModal')" style="font-size:var(--xs);padding:.25rem .75rem"><i data-lucide="plus"></i>新增</button>
+        </div>
+        <div class="tw">
+          <table><thead><tr><th>輪胎</th><th>平台</th><th>條件</th><th>目標價</th><th>目前最低</th><th>狀態</th><th></th></tr></thead>
+          <tbody id="alert-tbody"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="page-history" style="display:none">
+      <div class="card">
+        <div class="card-head">
+          <i data-lucide="line-chart" style="width:15px;height:15px;color:var(--primary);flex-shrink:0"></i>
+          <span class="card-title">30 天價格歷史</span>
+          <select class="fsel" id="hsel" onchange="drawHistory()" style="font-size:var(--xs);padding:.25rem .75rem"></select>
+        </div>
+        <div style="padding:1.25rem"><canvas id="hchart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="page" id="page-compare" style="display:none">
+      <div class="kpi-grid" id="cmpkpis"></div>
+      <div class="card">
+        <div class="card-head">
+          <i data-lucide="bar-chart-2" style="width:15px;height:15px;color:var(--primary);flex-shrink:0"></i>
+          <span class="card-title">各平台平均售價</span>
+        </div>
+        <div style="padding:1.25rem"><canvas id="cchart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="page" id="page-tires" style="display:none">
+      <div class="card">
+        <div class="card-head">
+          <i data-lucide="circle-dot" style="width:15px;height:15px;color:var(--primary);flex-shrink:0"></i>
+          <span class="card-title">輪胎清單管理</span>
+          <button class="btn btn-p" onclick="openM('addModal')" style="font-size:var(--xs);padding:.25rem .75rem"><i data-lucide="plus"></i>新增</button>
+        </div>
+        <div class="tw">
+          <table><thead><tr><th>品牌</th><th>型號</th><th>尺寸</th><th>備註</th><th>狀態</th><th></th></tr></thead>
+          <tbody id="tire-tbody"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="page-schedule" style="display:none">
+      <div class="card">
+        <div class="card-head">
+          <i data-lucide="clock" style="width:15px;height:15px;color:var(--primary);flex-shrink:0"></i>
+          <span class="card-title">自動更新排程</span>
+        </div>
+        <div style="padding:1.25rem">
+          <div class="fg">
+            <label class="flbl">更新頻率</label>
+            <select class="fi" id="freq">
+              <option value="15">每 15 分鐘</option>
+              <option value="30">每 30 分鐘</option>
+              <option value="60" selected>每 1 小時</option>
+              <option value="360">每 6 小時</option>
+              <option value="1440">每天一次</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label class="flbl">固定更新時段（台灣時間）</label>
+            <div class="frow">
+              <input type="time" class="fi" value="09:00">
+              <input type="time" class="fi" value="20:00">
+            </div>
+          </div>
+          <div class="fg">
+            <label class="flbl">通知方式</label>
+            <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.25rem">
+              <label style="display:flex;align-items:center;gap:.5rem;font-size:var(--sm);cursor:pointer"><input type="checkbox" checked>頁面警報橫幅</label>
+              <label style="display:flex;align-items:center;gap:.5rem;font-size:var(--sm);cursor:pointer"><input type="checkbox" checked>瀏覽器通知</label>
+              <label style="display:flex;align-items:center;gap:.5rem;font-size:var(--sm);cursor:pointer"><input type="checkbox">Email 通知</label>
+            </div>
+          </div>
+          <button class="btn btn-p" onclick="toast('排程設定已儲存','ok')">儲存設定</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+</div>
+
+<div class="ov" id="addModal">
+  <div class="modal">
+    <div class="m-title">新增追蹤輪胎 <button class="ib" onclick="closeM('addModal')"><i data-lucide="x"></i></button></div>
+    <div class="fg"><label class="flbl">品牌</label>
+      <select class="fi" id="m-brand">
+        <option>Michelin</option><option>Bridgestone</option><option>Continental</option>
+        <option>Yokohama</option><option>Pirelli</option><option>Dunlop</option><option>Toyo</option><option>其他</option>
+      </select>
+    </div>
+    <div class="fg"><label class="flbl">型號</label><input class="fi" id="m-model" placeholder="例：Pilot Sport 4"></div>
+    <div class="frow">
+      <div class="fg"><label class="flbl">尺寸</label><input class="fi" id="m-size" placeholder="例：225/45R18"></div>
+      <div class="fg"><label class="flbl">備註（選填）</label><input class="fi" id="m-note" placeholder="例：N0 規格"></div>
+    </div>
+    <div class="m-act">
+      <button class="btn btn-s" onclick="closeM('addModal')">取消</button>
+      <button class="btn btn-p" onclick="addTire()">新增監控</button>
+    </div>
+  </div>
+</div>
+
+<div class="ov" id="alertModal">
+  <div class="modal">
+    <div class="m-title">設定價格警報 <button class="ib" onclick="closeM('alertModal')"><i data-lucide="x"></i></button></div>
+    <div class="fg"><label class="flbl">輪胎</label><select class="fi" id="a-tire"></select></div>
+    <div class="fg"><label class="flbl">平台</label>
+      <select class="fi" id="a-plat">
+        <option value="all">任一平台</option>
+        <option value="pchome">PChome</option><option value="shopee">蝦皮</option>
+        <option value="yahoo">Yahoo</option><option value="ruten">露天</option>
+        <option value="leetire">小李輪胎</option><option value="ttshop">台中輪胎館</option>
+      </select>
+    </div>
+    <div class="frow">
+      <div class="fg"><label class="flbl">條件</label>
+        <select class="fi" id="a-cond"><option value="lte">低於 NT$</option><option value="pct">降幅超過 %</option></select>
+      </div>
+      <div class="fg"><label class="flbl">數值</label><input class="fi" id="a-val" type="number" placeholder="3000"></div>
+    </div>
+    <div class="m-act">
+      <button class="btn btn-s" onclick="closeM('alertModal')">取消</button>
+      <button class="btn btn-p" onclick="addAlert()">建立警報</button>
+    </div>
+  </div>
+</div>
+
+<div class="tw2" id="toasts"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+const PLATS = [
+  { id:'pchome',  name:'PChome 24h',  color:'#e85d04', url: q=>`https://24h.pchome.com.tw/search/?q=${enc(q)}` },
+  { id:'shopee',  name:'蝦皮購物',    color:'#ee4d2d', url: q=>`https://shopee.tw/search?keyword=${enc(q)}&category=6060` },
+  { id:'yahoo',   name:'Yahoo 購物',  color:'#720e9e', url: q=>`https://tw.buy.yahoo.com/search/product?p=${enc(q)}` },
+  { id:'ruten',   name:'露天拍賣',    color:'#e8750a', url: q=>`https://www.ruten.com.tw/find/?q=${enc(q)}` },
+  { id:'leetire', name:'小李輪胎',    color:'#1e6fcc', url: q=>`https://www.lee-tire.com.tw/tyre` },
+  { id:'ttshop',  name:'台中輪胎館',  color:'#22a44e', url: q=>`https://www.ttshop.com.tw` },
+];
+const PM = Object.fromEntries(PLATS.map(p=>[p.id,p]));
+const enc = s => encodeURIComponent(s);
+
+let tires = [
+  {id:1, brand:'Michelin',    model:'Pilot Sport 4',      size:'225/45R18', note:'',      trend:'dn',
+   prices:{pchome:4980,shopee:4650,yahoo:4820,ruten:4500,leetire:4680,ttshop:4750},
+   history:[5300,5250,5200,5150,5100,5050,5000,4980,4960,4940,4920,4900,4880,4860,4840,4820,4800,4780,4760,4740,4720,4700,4680,4670,4660,4650,4660,4670,4680,4650]},
+  {id:2, brand:'Bridgestone', model:'Turanza T005A',       size:'205/55R16', note:'',      trend:'dn',
+   prices:{pchome:3280,shopee:3100,yahoo:3200,ruten:3050,leetire:3150,ttshop:3080},
+   history:[3600,3560,3520,3480,3440,3400,3370,3340,3310,3280,3250,3220,3200,3180,3160,3140,3130,3120,3110,3100,3090,3080,3070,3060,3050,3040,3050,3060,3080,3100]},
+  {id:3, brand:'Continental', model:'ComfortContact CC6',  size:'215/55R17', note:'',      trend:'fl',
+   prices:{pchome:2950,shopee:2820,yahoo:2900,ruten:2780,leetire:2850,ttshop:2830},
+   history:[3100,3080,3060,3040,3020,3000,2980,2960,2950,2940,2920,2900,2880,2860,2850,2840,2830,2820,2810,2820,2830,2840,2850,2840,2830,2820,2830,2820,2810,2820]},
+  {id:4, brand:'Yokohama',    model:'BluEarth-A AE50',     size:'205/55R16', note:'',      trend:'dn',
+   prices:{pchome:2780,shopee:2650,yahoo:2720,ruten:2600,leetire:2680,ttshop:2700},
+   history:[2900,2880,2860,2840,2820,2800,2780,2760,2740,2720,2700,2680,2660,2640,2620,2610,2600,2590,2580,2570,2560,2550,2560,2570,2580,2590,2600,2620,2640,2650]},
+  {id:5, brand:'Pirelli',     model:'P Zero',              size:'245/40R19', note:'N0',    trend:'fl',
+   prices:{pchome:6800,shopee:6500,yahoo:6650,ruten:null, leetire:6580,ttshop:null},
+   history:[7200,7180,7150,7120,7100,7080,7060,7040,7020,7000,6980,6960,6940,6920,6900,6880,6860,6840,6820,6800,6780,6760,6740,6720,6700,6680,6660,6640,6620,6600]},
+  {id:6, brand:'Michelin',    model:'Energy Saver+',       size:'195/65R15', note:'',      trend:'dn',
+   prices:{pchome:2620,shopee:2450,yahoo:2550,ruten:2380,leetire:2480,ttshop:2500},
+   history:[2800,2780,2750,2720,2700,2680,2660,2640,2620,2600,2580,2560,2540,2520,2500,2490,2480,2470,2460,2450,2440,2430,2420,2410,2400,2390,2380,2390,2400,2450]},
+  {id:7, brand:'Bridgestone', model:'Ecopia EP300',        size:'185/65R15', note:'',      trend:'up',
+   prices:{pchome:null, shopee:1950,yahoo:2050,ruten:1900,leetire:1980,ttshop:2000},
+   history:[2200,2180,2160,2140,2120,2100,2080,2060,2040,2020,2000,1990,1980,1970,1960,1950,1940,1930,1920,1910,1900,1910,1920,1930,1940,1950,1960,1970,1980,2000]},
+  {id:8, brand:'Toyo',        model:'Proxes CF2',          size:'205/55R16', note:'',      trend:'dn',
+   prices:{pchome:2750,shopee:2550,yahoo:2680,ruten:2480,leetire:2600,ttshop:2580},
+   history:[2900,2880,2860,2840,2820,2800,2780,2760,2740,2720,2700,2680,2660,2640,2620,2600,2580,2560,2550,2540,2530,2520,2510,2500,2490,2480,2490,2510,2540,2550]},
+  {id:9, brand:'Yokohama',    model:'ADVAN Fleva V701',    size:'215/55R17', note:'',      trend:'dn',
+   prices:{pchome:3500,shopee:3300,yahoo:3420,ruten:3180,leetire:3280,ttshop:3350},
+   history:[3700,3680,3660,3640,3620,3600,3580,3560,3540,3520,3500,3480,3460,3440,3420,3400,3380,3360,3340,3320,3300,3280,3260,3240,3220,3200,3210,3220,3250,3300]},
+  {id:10,brand:'Continental', model:'PremiumContact 6',    size:'225/45R18', note:'XL',    trend:'fl',
+   prices:{pchome:5380,shopee:5100,yahoo:5250,ruten:null, leetire:5200,ttshop:5180},
+   history:[5800,5780,5760,5740,5720,5700,5680,5660,5640,5620,5600,5580,5560,5540,5520,5500,5480,5460,5440,5420,5400,5380,5360,5340,5320,5300,5310,5320,5310,5300]},
+  {id:11,brand:'Dunlop',      model:'SP Sport Maxx RT2',   size:'225/45R17', note:'',      trend:'dn',
+   prices:{pchome:3850,shopee:3600,yahoo:3750,ruten:3500,leetire:3650,ttshop:3720},
+   history:[4000,3980,3960,3940,3920,3900,3880,3860,3840,3820,3800,3780,3760,3740,3720,3700,3680,3660,3640,3620,3600,3580,3560,3540,3520,3500,3510,3530,3560,3600]},
+  {id:12,brand:'Pirelli',     model:'Cinturato P7',        size:'205/55R16', note:'',      trend:'up',
+   prices:{pchome:4100,shopee:3900,yahoo:4000,ruten:3820,leetire:3950,ttshop:3980},
+   history:[3800,3820,3840,3860,3880,3900,3920,3940,3960,3980,4000,4020,4040,4060,4070,4080,4090,4100,4080,4060,4040,4020,4000,3980,3960,3940,3920,3900,3900,3900]},
+];
+
+let alerts = [];
+let filtered = [...tires];
+let sortDir = {};
+let hChart = null, cChart = null;
+
+const minP = p => { const v=Object.values(p).filter(x=>x!=null); return v.length?Math.min(...v):null; };
+const fmtP = v => v!=null ? '$'+v.toLocaleString() : '—';
+const isDark = ()=> document.documentElement.getAttribute('data-theme')==='dark';
+const chartTheme = ()=>({ grid: isDark()?'rgba(255,255,255,0.04)':'rgba(0,0,0,0.05)', text: isDark()?'#888582':'#7a7974' });
+
+async function loadPricesJson(){
+  try{
+    const r = await fetch('./prices.json?t='+Date.now());
+    if(!r.ok) throw new Error('no file');
+    const data = await r.json();
+    const arr = data.tires || data;
+    arr.forEach(item=>{
+      const t = tires.find(t=>t.id===item.id);
+      if(t){
+        Object.keys(item.prices).forEach(k=>{ if(item.prices[k]!=null) t.prices[k]=item.prices[k]; });
+        const vals=Object.values(t.prices).filter(v=>v!=null);
+        if(vals.length){ const mp=Math.min(...vals); t.history.push(mp); if(t.history.length>30)t.history.shift(); }
+      }
+    });
+    const upd = data.updated_at ? new Date(data.updated_at) : new Date();
+    document.getElementById('upd').textContent='最後更新：'+upd.toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit'});
+    filterRows(); renderKPIs();
+  }catch(e){
+    document.getElementById('upd').textContent='最後更新：示範資料';
+  }
+}
+
+function renderLegend(){
+  document.getElementById('legend').innerHTML = PLATS.map(p=>`<div class="leg-item"><span class="dot" style="background:${p.color}"></span>${p.name}</div>`).join('');
+}
+
+function renderTable(data){
+  document.getElementById('rowct').textContent = `顯示 ${data.length} 筆`;
+  const tbody = document.getElementById('tbody');
+  if(!data.length){
+    tbody.innerHTML=`<tr><td colspan="11" style="text-align:center;padding:4rem;color:var(--muted)">沒有符合條件的輪胎</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = data.map(t=>{
+    const mp = minP(t.prices);
+    const pcols = PLATS.map(p=>{
+      const v = t.prices[p.id];
+      if(v==null) return `<td class="p-na">—</td>`;
+      const q = `${t.brand} ${t.model} ${t.size}`;
+      const cls = v===mp?'best':(v>mp*1.12?'high':'');
+      return `<td><a class="pl ${cls}" href="${p.url(q)}" target="_blank" rel="noopener">${fmtP(v)}<i data-lucide="external-link"></i></a></td>`;
+    }).join('');
+    const trendH = {
+      dn:`<span class="trend dn"><i data-lucide="trending-down" style="width:12px;height:12px"></i>下降</span>`,
+      up:`<span class="trend up"><i data-lucide="trending-up" style="width:12px;height:12px"></i>上升</span>`,
+      fl:`<span class="trend fl">— 持平</span>`
+    }[t.trend]||'';
+    return `<tr data-id="${t.id}">
+      <td><div style="font-weight:600">${t.brand}</div><div style="font-size:var(--xs);color:var(--muted)">${t.model}${t.note?` <span class="badge b-gr">${t.note}</span>`:''}</div></td>
+      <td><span style="font-family:var(--mono);font-size:var(--xs)">${t.size}</span></td>
+      ${pcols}
+      <td style="font-weight:700;color:var(--success)">${fmtP(mp)}</td>
+      <td>${trendH}</td>
+      <td><button class="ib" onclick="removeTire(${t.id})" style="width:28px;height:28px" title="移除"><i data-lucide="trash-2" style="width:12px;height:12px;color:var(--faint)"></i></button></td>
+    </tr>`;
+  }).join('');
+  lucide.createIcons();
+}
+
+function filterRows(){
+  const q=document.getElementById('qi').value.toLowerCase();
+  const b=document.getElementById('bf').value;
+  const s=document.getElementById('szf').value;
+  filtered=tires.filter(t=>
+    (!q||`${t.brand} ${t.model} ${t.size}`.toLowerCase().includes(q))&&
+    (!b||t.brand===b)&&(!s||t.size===s)
+  );
+  renderTable(filtered);
+}
+
+function sortBy(f){
+  sortDir[f]=!sortDir[f];
+  filtered.sort((a,b)=>sortDir[f]?a[f].localeCompare(b[f]):b[f].localeCompare(a[f]));
+  renderTable(filtered);
+}
+
+function populateSizes(){
+  const sel=document.getElementById('szf');
+  const sizes=[...new Set(tires.map(t=>t.size))].sort();
+  sel.innerHTML=`<option value="">所有尺寸</option>`+sizes.map(s=>`<option>${s}</option>`).join('');
+}
+
+function renderKPIs(){
+  const mins=tires.map(t=>minP(t.prices)).filter(v=>v!=null);
+  const avg=mins.length?Math.round(mins.reduce((a,b)=>a+b,0)/mins.length):0;
+  const platAvg=PLATS.map(p=>{
+    const v=tires.map(t=>t.prices[p.id]).filter(v=>v!=null);
+    return{p,avg:v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length):0};
+  });
+  const best=platAvg.reduce((a,b)=>b.avg&&b.avg<(a.avg||Infinity)?b:a,{});
+  const triggered=alerts.filter(a=>a.triggered).length;
+  document.getElementById('kpis').innerHTML=[
+    {lbl:'追蹤輪胎數', val:tires.length, sub:'條記錄', sc:''},
+    {lbl:'監控平台數', val:PLATS.length, sub:'全部正常', sc:''},
+    {lbl:'最低均價',  val:'$'+avg.toLocaleString(), sub:'各型號最低均價', sc:'dn'},
+    {lbl:'最實惠平台',val:best.p?.name||'—', sub:`均價 $${best.avg?.toLocaleString()||'—'}`, sc:'dn',sm:true},
+    {lbl:'警報觸發數', val:triggered, sub:'目前觸發中', sc:triggered?'up':''},
+  ].map(k=>`<div class="kpi">
+    <div class="kpi-lbl">${k.lbl}</div>
+    <div class="kpi-val" style="${k.sm?'font-size:var(--lg)':''}">${k.val}</div>
+    <div class="kpi-sub ${k.sc}">${k.sub}</div>
+  </div>`).join('');
+}
+
+function addTire(){
+  const brand=document.getElementById('m-brand').value;
+  const model=document.getElementById('m-model').value.trim();
+  const size=document.getElementById('m-size').value.trim();
+  const note=document.getElementById('m-note').value.trim();
+  if(!model||!size){toast('請填寫型號和尺寸','info');return;}
+  const r=()=>Math.round(3000*(0.9+Math.random()*.3));
+  tires.unshift({id:Date.now(),brand,model,size,note,trend:'fl',
+    prices:{pchome:r(),shopee:r(),yahoo:r(),ruten:r(),leetire:r(),ttshop:r()},
+    history:Array.from({length:30},(_,i)=>Math.round(3000*(1+.03*(30-i)/30)))
+  });
+  filtered=[...tires]; populateSizes(); filterRows(); renderKPIs(); renderTireList(); populateAlertSel();
+  closeM('addModal');
+  ['m-model','m-size','m-note'].forEach(id=>document.getElementById(id).value='');
+  toast(`已新增 ${brand} ${model}！`,'ok');
+}
+function removeTire(id){
+  tires=tires.filter(t=>t.id!==id); filtered=tires.slice();
+  populateSizes(); filterRows(); renderKPIs(); renderTireList(); populateAlertSel();
+  toast('已移除輪胎追蹤','info');
+}
+
+function populateAlertSel(){
+  document.getElementById('a-tire').innerHTML=
+    tires.map(t=>`<option value="${t.id}">${t.brand} ${t.model} ${t.size}</option>`).join('');
+}
+function addAlert(){
+  const tireId=parseInt(document.getElementById('a-tire').value);
+  const plat=document.getElementById('a-plat').value;
+  const cond=document.getElementById('a-cond').value;
+  const val=parseFloat(document.getElementById('a-val').value);
+  if(!val){toast('請輸入數值','info');return;}
+  const t=tires.find(t=>t.id===tireId);
+  const mp=minP(t.prices);
+  const triggered=cond==='lte'&&mp!=null&&mp<=val;
+  alerts.push({id:Date.now(),tireId,plat,cond,val,triggered});
+  closeM('alertModal'); renderAlerts(); updateAlertUI();
+  toast('警報設定成功！','ok');
+}
+function removeAlert(id){ alerts=alerts.filter(a=>a.id!==id); renderAlerts(); updateAlertUI(); toast('已移除警報','info'); }
+function renderAlerts(){
+  const tbody=document.getElementById('alert-tbody');
+  if(!alerts.length){
+    tbody.innerHTML=`<tr><td colspan="7" style="text-align:center;padding:3rem;color:var(--muted)">尚無警報，點「新增」設定</td></tr>`;
+    return;
+  }
+  tbody.innerHTML=alerts.map(a=>{
+    const t=tires.find(t=>t.id===a.tireId); if(!t)return'';
+    const mp=minP(t.prices);
+    const platLabel=a.plat==='all'?'任一平台':PM[a.plat]?.name||a.plat;
+    const condLabel=a.cond==='lte'?`低於 $${a.val.toLocaleString()}`:`降幅超過 ${a.val}%`;
+    return `<tr>
+      <td><strong>${t.brand}</strong> ${t.model}<br><span style="font-family:var(--mono);font-size:var(--xs);color:var(--muted)">${t.size}</span></td>
+      <td>${platLabel}</td><td>${condLabel}</td>
+      <td>$${a.val.toLocaleString()}</td>
+      <td>${mp?'$'+mp.toLocaleString():'—'}</td>
+      <td><span class="badge ${a.triggered?'b-r':'b-g'}">${a.triggered?'已觸發':'監控中'}</span></td>
+      <td><button class="ib" onclick="removeAlert(${a.id})" style="width:28px;height:28px"><i data-lucide="trash-2" style="width:12px;height:12px;color:var(--faint)"></i></button></td>
+    </tr>`;
+  }).join('');
+  lucide.createIcons();
+}
+function updateAlertUI(){
+  const n=alerts.filter(a=>a.triggered).length;
+  const badge=document.getElementById('abadge');
+  badge.textContent=n; badge.style.display=n?'':'none';
+  const triggered=alerts.filter(a=>a.triggered);
+  if(triggered.length){
+    const msgs=triggered.map(a=>{const t=tires.find(t=>t.id===a.tireId);return t?`${t.brand} ${t.model} 已觸發`:''}).filter(Boolean).join('、');
+    document.getElementById('astrip-txt').innerHTML=`<strong>${n} 個警報觸發：</strong>${msgs}`;
+    document.getElementById('astrip').style.display='flex';
+  }
+  renderKPIs();
+}
+
+function renderTireList(){
+  document.getElementById('tire-tbody').innerHTML=tires.map(t=>`<tr>
+    <td><strong>${t.brand}</strong></td>
+    <td>${t.model}</td>
+    <td><span style="font-family:var(--mono);font-size:var(--xs)">${t.size}</span></td>
+    <td>${t.note||'—'}</td>
+    <td><span class="badge b-g">追蹤中</span></td>
+    <td><button class="ib" onclick="removeTire(${t.id})" style="width:28px;height:28px"><i data-lucide="trash-2" style="width:12px;height:12px;color:var(--faint)"></i></button></td>
+  </tr>`).join('');
+  lucide.createIcons();
+}
+
+function populateHistSel(){
+  document.getElementById('hsel').innerHTML=
+    tires.map(t=>`<option value="${t.id}">${t.brand} ${t.model} (${t.size})</option>`).join('');
+}
+function drawHistory(){
+  if(hChart)hChart.destroy();
+  const tid=parseInt(document.getElementById('hsel').value);
+  const t=tires.find(t=>t.id===tid); if(!t)return;
+  const {grid,text}=chartTheme();
+  const labels=Array.from({length:30},(_,i)=>{
+    const d=new Date(); d.setDate(d.getDate()-(29-i));
+    return `${d.getMonth()+1}/${d.getDate()}`;
+  });
+  hChart=new Chart(document.getElementById('hchart').getContext('2d'),{
+    type:'line',
+    data:{
+      labels,
+      datasets:PLATS.map((p,i)=>({
+        label:p.name,
+        data:t.history.map(v=>v?Math.round(v*(0.86+i*0.04)):null),
+        borderColor:p.color,backgroundColor:p.color+'18',
+        borderWidth:2,pointRadius:0,tension:.4,fill:false,spanGaps:true
+      }))
+    },
+    options:{
+      responsive:true,maintainAspectRatio:true,
+      plugins:{legend:{labels:{color:text,boxWidth:10,font:{size:10}}}},
+      scales:{
+        x:{ticks:{color:text,font:{size:10},maxTicksLimit:8},grid:{color:grid}},
+        y:{ticks:{color:text,font:{size:10},callback:v=>'$'+v.toLocaleString()},grid:{color:grid}}
+      }
+    }
+  });
+}
+
+function drawCompare(){
+  const {grid,text}=chartTheme();
+  const avgs=PLATS.map(p=>{
+    const v=tires.map(t=>t.prices[p.id]).filter(v=>v!=null);
+    return{p,avg:v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length):0};
+  });
+  const minAvg=Math.min(...avgs.map(x=>x.avg).filter(Boolean));
+  document.getElementById('cmpkpis').innerHTML=avgs.map(x=>`<div class="kpi">
+    <div class="kpi-lbl"><span class="dot" style="background:${x.p.color};margin-right:4px"></span>${x.p.name}</div>
+    <div class="kpi-val" style="font-size:var(--lg)">${x.avg?'$'+x.avg.toLocaleString():'—'}</div>
+    <div class="kpi-sub ${x.avg===minAvg?'dn':''}">${x.avg===minAvg?'⭐ 最低均價':'平均售價'}</div>
+  </div>`).join('');
+  if(cChart)cChart.destroy();
+  cChart=new Chart(document.getElementById('cchart').getContext('2d'),{
+    type:'bar',
+    data:{
+      labels:PLATS.map(p=>p.name),
+      datasets:[{
+        label:'平均售價',data:avgs.map(x=>x.avg),
+        backgroundColor:PLATS.map(p=>p.color+'cc'),borderColor:PLATS.map(p=>p.color),
+        borderWidth:1,borderRadius:6,borderSkipped:false
+      }]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:true,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{ticks:{color:text,font:{size:11}},grid:{display:false}},
+        y:{ticks:{color:text,font:{size:10},callback:v=>'$'+v.toLocaleString()},grid:{color:grid}}
+      }
+    }
+  });
+}
+
+let updating=false;
+function doUpdate(){
+  if(updating)return; updating=true;
+  const ri=document.getElementById('ri');
+  if(!document.getElementById('spinstyle')){
+    const s=document.createElement('style');s.id='spinstyle';
+    s.textContent='@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}';
+    document.head.appendChild(s);
+  }
+  ri.style.animation='spin 1s linear infinite';
+  loadPricesJson().finally(()=>{
+    setTimeout(()=>{ ri.style.animation=''; updating=false; },800);
+  });
+}
+function startAuto(){ setInterval(doUpdate, 60*60*1000); }
+
+const PAGES={dashboard:'價格總覽',alerts:'價格警報',history:'歷史趨勢',compare:'平台比較',tires:'輪胎管理',schedule:'更新排程'};
+function go(p,btn){
+  Object.keys(PAGES).forEach(k=>{ const el=document.getElementById('page-'+k); if(el)el.style.display=k===p?'':'none'; });
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  document.getElementById('ptitle').textContent=PAGES[p]||p;
+  if(p==='history'){populateHistSel();drawHistory();}
+  if(p==='compare')drawCompare();
+  if(p==='tires')renderTireList();
+  if(window.innerWidth<=768)document.getElementById('sidebar').classList.remove('open');
+}
+
+function exportCSV(){
+  const hdrs=['品牌','型號','尺寸','備註',...PLATS.map(p=>p.name),'最低價','趨勢'];
+  const rows=filtered.map(t=>[t.brand,t.model,t.size,t.note,...PLATS.map(p=>t.prices[p.id]??''),minP(t.prices)??'',{dn:'下降',up:'上升',fl:'持平'}[t.trend]||'']);
+  const csv=[hdrs,...rows].map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}));
+  a.download=`tire-prices-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click(); toast('CSV 已下載','ok');
+}
+
+const openM=id=>document.getElementById(id).classList.add('open');
+const closeM=id=>document.getElementById(id).classList.remove('open');
+document.querySelectorAll('.ov').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');}));
+function toggleTheme(){
+  const n=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',n);
+  document.getElementById('ti').setAttribute('data-lucide',n==='dark'?'moon':'sun');
+  lucide.createIcons();
+}
+function toast(msg,type='info'){
+  const wrap=document.getElementById('toasts');
+  const el=document.createElement('div'); el.className=`toast ${type}`;
+  el.innerHTML=`<i data-lucide="${type==='ok'?'check-circle':'info'}"></i>${msg}`;
+  wrap.appendChild(el); lucide.createIcons();
+  setTimeout(()=>{el.style.cssText='opacity:0;transform:translateX(16px);transition:all .2s';setTimeout(()=>el.remove(),250);},2500);
+}
+const toggleSB=()=>document.getElementById('sidebar').classList.toggle('open');
+window.addEventListener('resize',()=>{ document.getElementById('menu-btn').style.display=window.innerWidth<=768?'flex':'none'; });
+
+document.addEventListener('DOMContentLoaded',()=>{
+  lucide.createIcons();
+  renderLegend();
+  populateSizes();
+  renderTable(tires);
+  renderKPIs();
+  renderAlerts();
+  populateAlertSel();
+  loadPricesJson();
+  startAuto();
+  document.getElementById('menu-btn').style.display=window.innerWidth<=768?'flex':'none';
+});
+</script>
+</body>
+</html>
