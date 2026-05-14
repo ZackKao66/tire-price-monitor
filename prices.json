@@ -1,0 +1,185 @@
+{
+  "updated_at": "2026-05-14T06:29:57.923102Z",
+  "tires": [
+    {
+      "id": 1,
+      "brand": "Michelin",
+      "model": "Pilot Sport 4",
+      "size": "225/45R18",
+      "prices": {
+        "pchome": 9972,
+        "shopee": null,
+        "yahoo": null,
+        "ruten": null,
+        "leetire": null,
+        "ttshop": null
+      },
+      "updated_at": "2026-05-14T06:29:09.431141Z"
+    },
+    {
+      "id": 2,
+      "brand": "Bridgestone",
+      "model": "Turanza T005A",
+      "size": "205/55R16",
+      "prices": {
+        "pchome": 5576,
+        "shopee": null,
+        "yahoo": null,
+        "ruten": null,
+        "leetire": null,
+        "ttshop": null
+      },
+      "updated_at": "2026-05-14T06:29:13.813126Z"
+    },
+    {
+      "id": 3,
+      "brand": "Continental",
+      "model": "ComfortContact CC6",
+      "size": "215/55R17",
+      "prices": {
+        "pchome": 5176,
+        "shopee": null,
+        "yahoo": null,
+        "ruten": null,
+        "leetire": null,
+        "ttshop": null
+      },
+      "updated_at": "2026-05-14T06:29:18.387540Z"
+    },
+    {
+      "id": 4,
+      "brand": "Yokohama",
+      "model": "BluEarth-A AE50",
+      "size": "205/55R16",
+      "prices": {
+        "pchome": null,
+        "shopee": null,
+        "yahoo": null,
+        "ruten": null,
+        "leetire": null,
+        "ttshop": null
+      },
+      "updated_at": "2026-05-14T06:29:23.195435Z"
+    },
+    {
+      "id": 5,
+      "brand": "Pirelli",
+      "model": "P Zero",
+      "size": "245/40R19",
+      "prices": {
+        "pchome": 15150,
+        "shopee": null,
+        "yahoo": null,
+        "ruten": null,
+        "leetire": null,
+        "ttshop": null
+      },
+      "updated_at": "2026-05-14T06:29:27.714849Z"
+    },
+    {
+      "id": 6,
+      "brand": "Michelin",
+      "model": "Energy Saver+",
+      "size": "195/65R15",
+      "prices": {
+        "pchome": 12644,
+        "shopee": null,
+        "yahoo": null,
+        "ruten": null,
+        "leetire": null,
+        "ttshop": null
+      },
+      "updated_at": "2026-05-14T06:29:31.746317Z"
+    },
+    {
+      "id": 7,
+      "brand": "Bridgestone",
+      "model": "Ecopia EP300",
+      "size": "185/65R15",
+      "prices": {
+        "pchome": 4728,
+        "shopee": null,
+        "yahoo": null,
+        "ruten": null,
+        "leetire": null,
+        "ttshop": null
+      },
+      "updated_at": "2026-05-14T06:29:36.068623Z"
+    },
+    {
+      "id": 8,
+      "brand": "Toyo",
+      "model": "Proxes CF2",
+      "size": "205/55R16",
+      "prices": {
+        "pchome": 24097,
+        "shopee": null,
+        "yahoo": null,
+        "ruten": null,
+        "leetire": null,
+        "ttshop": null
+      },
+      "updated_at": "2026-05-14T06:29:40.047799Z"
+    },
+    {
+      "id": 9,
+      "brand": "Yokohama",
+      "model": "ADVAN Fleva V701",
+      "size": "215/55R17",
+      "prices": {
+        "pchome": 12420,
+        "shopee": null,
+        "yahoo": null,
+        "ruten": null,
+        "leetire": null,
+        "ttshop": null
+      },
+      "updated_at": "2026-05-14T06:29:43.984125Z"
+    },
+    {
+      "id": 10,
+      "brand": "Continental",
+      "model": "PremiumContact 6",
+      "size": "225/45R18",
+      "prices": {
+        "pchome": 8776,
+        "shopee": null,
+        "yahoo": null,
+        "ruten": null,
+        "leetire": null,
+        "ttshop": null
+      },
+      "updated_at": "2026-05-14T06:29:48.639468Z"
+    },
+    {
+      "id": 11,
+      "brand": "Dunlop",
+      "model": "SP Sport Maxx RT2",
+      "size": "225/45R17",
+      "prices": {
+        "pchome": 4208,
+        "shopee": null,
+        "yahoo": null,
+        "ruten": null,
+        "leetire": null,
+        "ttshop": null
+      },
+      "updated_at": "2026-05-14T06:29:53.437053Z"
+    },
+    {
+      "id": 12,
+      "brand": "Pirelli",
+      "model": "Cinturato P7",
+      "size": "205/55R16",
+      "prices": {
+        "pchome": 6396,
+        "shopee": null,
+        "yahoo": null,
+        "ruten": null,
+        "leetire": null,
+        "ttshop": null
+      },
+      "updated_at": "2026-05-14T06:29:57.922774Z"
+    }
+  ]
+}
