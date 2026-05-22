@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-05-21T14:48:03.816628Z",
+  "updated_at": "2026-05-22T04:57:06.636886Z",
   "tires": [
     {
       "id": 1,
@@ -14,7 +14,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-21T14:45:19.879783Z"
+      "updated_at": "2026-05-22T04:56:28.249014Z"
     },
     {
       "id": 2,
@@ -29,7 +29,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-21T14:45:25.237570Z"
+      "updated_at": "2026-05-22T04:56:31.439135Z"
     },
     {
       "id": 3,
@@ -44,7 +44,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-21T14:45:31.395736Z"
+      "updated_at": "2026-05-22T04:56:35.091563Z"
     },
     {
       "id": 4,
@@ -59,7 +59,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-21T14:45:37.875391Z"
+      "updated_at": "2026-05-22T04:56:38.173906Z"
     },
     {
       "id": 5,
@@ -74,7 +74,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-21T14:45:55.502230Z"
+      "updated_at": "2026-05-22T04:56:41.302974Z"
     },
     {
       "id": 6,
@@ -82,14 +82,14 @@
       "model": "Energy Saver+",
       "size": "195/65R15",
       "prices": {
-        "pchome": 12644,
+        "pchome": 12506,
         "shopee": null,
         "yahoo": null,
         "ruten": null,
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-21T14:46:16.849663Z"
+      "updated_at": "2026-05-22T04:56:44.744730Z"
     },
     {
       "id": 7,
@@ -104,7 +104,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-21T14:46:24.578297Z"
+      "updated_at": "2026-05-22T04:56:50.241477Z"
     },
     {
       "id": 8,
@@ -119,7 +119,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-21T14:46:44.437646Z"
+      "updated_at": "2026-05-22T04:56:53.335911Z"
     },
     {
       "id": 9,
@@ -134,7 +134,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-21T14:47:03.433854Z"
+      "updated_at": "2026-05-22T04:56:57.127240Z"
     },
     {
       "id": 10,
@@ -149,7 +149,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-21T14:47:25.102387Z"
+      "updated_at": "2026-05-22T04:57:00.071114Z"
     },
     {
       "id": 11,
@@ -164,7 +164,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-21T14:47:44.865566Z"
+      "updated_at": "2026-05-22T04:57:02.774512Z"
     },
     {
       "id": 12,
@@ -179,7 +179,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-21T14:48:03.816415Z"
+      "updated_at": "2026-05-22T04:57:06.636693Z"
     }
   ]
 }
