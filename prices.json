@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-05-31T13:18:37.853705Z",
+  "updated_at": "2026-06-01T05:55:46.012429Z",
   "tires": [
     {
       "id": 1,
@@ -14,7 +14,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-31T13:17:58.353454Z"
+      "updated_at": "2026-06-01T05:55:00.122159Z"
     },
     {
       "id": 2,
@@ -29,7 +29,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-31T13:18:01.672398Z"
+      "updated_at": "2026-06-01T05:55:03.493291Z"
     },
     {
       "id": 3,
@@ -44,7 +44,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-31T13:18:04.936969Z"
+      "updated_at": "2026-06-01T05:55:08.505576Z"
     },
     {
       "id": 4,
@@ -59,7 +59,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-31T13:18:08.585891Z"
+      "updated_at": "2026-06-01T05:55:18.082948Z"
     },
     {
       "id": 5,
@@ -74,7 +74,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-31T13:18:11.973940Z"
+      "updated_at": "2026-06-01T05:55:22.868253Z"
     },
     {
       "id": 6,
@@ -89,7 +89,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-31T13:18:14.730378Z"
+      "updated_at": "2026-06-01T05:55:25.911689Z"
     },
     {
       "id": 7,
@@ -104,7 +104,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-31T13:18:18.157655Z"
+      "updated_at": "2026-06-01T05:55:29.212089Z"
     },
     {
       "id": 8,
@@ -119,7 +119,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-31T13:18:25.805572Z"
+      "updated_at": "2026-06-01T05:55:31.870493Z"
     },
     {
       "id": 9,
@@ -134,7 +134,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-31T13:18:28.379914Z"
+      "updated_at": "2026-06-01T05:55:36.215493Z"
     },
     {
       "id": 10,
@@ -149,7 +149,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-31T13:18:30.815993Z"
+      "updated_at": "2026-06-01T05:55:39.494456Z"
     },
     {
       "id": 11,
@@ -157,14 +157,14 @@
       "model": "SP Sport Maxx RT2",
       "size": "225/45R17",
       "prices": {
-        "pchome": 5655,
+        "pchome": 4208,
         "shopee": null,
         "yahoo": null,
         "ruten": null,
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-31T13:18:34.505401Z"
+      "updated_at": "2026-06-01T05:55:42.622497Z"
     },
     {
       "id": 12,
@@ -179,7 +179,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-05-31T13:18:37.853369Z"
+      "updated_at": "2026-06-01T05:55:46.012229Z"
     }
   ]
 }
