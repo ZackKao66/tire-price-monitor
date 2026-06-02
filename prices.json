@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-01T17:20:53.183811Z",
+  "updated_at": "2026-06-02T05:26:14.260093Z",
   "tires": [
     {
       "id": 1,
@@ -14,7 +14,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-01T17:20:08.369625Z"
+      "updated_at": "2026-06-02T05:25:38.970129Z"
     },
     {
       "id": 2,
@@ -29,7 +29,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-01T17:20:12.390285Z"
+      "updated_at": "2026-06-02T05:25:42.056072Z"
     },
     {
       "id": 3,
@@ -44,7 +44,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-01T17:20:16.882369Z"
+      "updated_at": "2026-06-02T05:25:45.012811Z"
     },
     {
       "id": 4,
@@ -59,7 +59,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-01T17:20:20.841024Z"
+      "updated_at": "2026-06-02T05:25:48.176677Z"
     },
     {
       "id": 5,
@@ -74,7 +74,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-01T17:20:24.897733Z"
+      "updated_at": "2026-06-02T05:25:51.513530Z"
     },
     {
       "id": 6,
@@ -89,7 +89,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-01T17:20:28.394829Z"
+      "updated_at": "2026-06-02T05:25:54.182478Z"
     },
     {
       "id": 7,
@@ -104,7 +104,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-01T17:20:31.910108Z"
+      "updated_at": "2026-06-02T05:25:56.833889Z"
     },
     {
       "id": 8,
@@ -112,14 +112,14 @@
       "model": "Proxes CF2",
       "size": "205/55R16",
       "prices": {
-        "pchome": null,
+        "pchome": 23152,
         "shopee": null,
         "yahoo": null,
         "ruten": null,
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-01T17:20:36.029682Z"
+      "updated_at": "2026-06-02T05:25:59.290735Z"
     },
     {
       "id": 9,
@@ -134,7 +134,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-01T17:20:40.292593Z"
+      "updated_at": "2026-06-02T05:26:02.207492Z"
     },
     {
       "id": 10,
@@ -149,7 +149,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-01T17:20:44.201823Z"
+      "updated_at": "2026-06-02T05:26:04.676541Z"
     },
     {
       "id": 11,
@@ -157,14 +157,14 @@
       "model": "SP Sport Maxx RT2",
       "size": "225/45R17",
       "prices": {
-        "pchome": 5655,
+        "pchome": 4208,
         "shopee": null,
         "yahoo": null,
         "ruten": null,
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-01T17:20:48.896805Z"
+      "updated_at": "2026-06-02T05:26:07.718073Z"
     },
     {
       "id": 12,
@@ -179,7 +179,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-01T17:20:53.183440Z"
+      "updated_at": "2026-06-02T05:26:14.259768Z"
     }
   ]
 }
