@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-08T15:32:51.517709Z",
+  "updated_at": "2026-06-09T04:59:36.408546Z",
   "tires": [
     {
       "id": 1,
@@ -14,7 +14,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-08T15:32:11.271193Z"
+      "updated_at": "2026-06-09T04:58:57.355679Z"
     },
     {
       "id": 2,
@@ -29,7 +29,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-08T15:32:14.869039Z"
+      "updated_at": "2026-06-09T04:59:00.641635Z"
     },
     {
       "id": 3,
@@ -44,7 +44,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-08T15:32:18.501966Z"
+      "updated_at": "2026-06-09T04:59:04.354619Z"
     },
     {
       "id": 4,
@@ -59,7 +59,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-08T15:32:22.590376Z"
+      "updated_at": "2026-06-09T04:59:08.320797Z"
     },
     {
       "id": 5,
@@ -74,7 +74,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-08T15:32:26.214292Z"
+      "updated_at": "2026-06-09T04:59:11.625001Z"
     },
     {
       "id": 6,
@@ -89,7 +89,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-08T15:32:30.192166Z"
+      "updated_at": "2026-06-09T04:59:15.180407Z"
     },
     {
       "id": 7,
@@ -104,7 +104,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-08T15:32:33.947443Z"
+      "updated_at": "2026-06-09T04:59:18.844718Z"
     },
     {
       "id": 8,
@@ -119,7 +119,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-08T15:32:37.443039Z"
+      "updated_at": "2026-06-09T04:59:22.742077Z"
     },
     {
       "id": 9,
@@ -134,7 +134,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-08T15:32:41.091910Z"
+      "updated_at": "2026-06-09T04:59:26.334268Z"
     },
     {
       "id": 10,
@@ -143,13 +143,13 @@
       "size": "225/45R18",
       "prices": {
         "pchome": 8776,
-        "shopee": 2800,
+        "shopee": null,
         "yahoo": null,
         "ruten": null,
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-08T15:32:44.470185Z"
+      "updated_at": "2026-06-09T04:59:29.430420Z"
     },
     {
       "id": 11,
@@ -164,7 +164,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-08T15:32:47.807234Z"
+      "updated_at": "2026-06-09T04:59:32.793411Z"
     },
     {
       "id": 12,
@@ -179,7 +179,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-08T15:32:51.517442Z"
+      "updated_at": "2026-06-09T04:59:36.408265Z"
     }
   ]
 }
