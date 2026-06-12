@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-12T05:27:25.320397Z",
+  "updated_at": "2026-06-12T14:38:43.791772Z",
   "tires": [
     {
       "id": 1,
@@ -14,7 +14,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-12T05:26:50.981220Z"
+      "updated_at": "2026-06-12T14:38:00.788892Z"
     },
     {
       "id": 2,
@@ -29,7 +29,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-12T05:26:54.194162Z"
+      "updated_at": "2026-06-12T14:38:04.045690Z"
     },
     {
       "id": 3,
@@ -44,7 +44,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-12T05:26:57.292010Z"
+      "updated_at": "2026-06-12T14:38:12.940763Z"
     },
     {
       "id": 4,
@@ -59,7 +59,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-12T05:27:00.709574Z"
+      "updated_at": "2026-06-12T14:38:17.166778Z"
     },
     {
       "id": 5,
@@ -74,7 +74,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-12T05:27:03.762901Z"
+      "updated_at": "2026-06-12T14:38:20.196328Z"
     },
     {
       "id": 6,
@@ -89,7 +89,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-12T05:27:06.570579Z"
+      "updated_at": "2026-06-12T14:38:23.346168Z"
     },
     {
       "id": 7,
@@ -104,7 +104,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-12T05:27:09.310632Z"
+      "updated_at": "2026-06-12T14:38:26.593629Z"
     },
     {
       "id": 8,
@@ -112,14 +112,14 @@
       "model": "Proxes CF2",
       "size": "205/55R16",
       "prices": {
-        "pchome": 23152,
+        "pchome": 23307,
         "shopee": null,
         "yahoo": null,
         "ruten": null,
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-12T05:27:12.719796Z"
+      "updated_at": "2026-06-12T14:38:30.103128Z"
     },
     {
       "id": 9,
@@ -127,14 +127,14 @@
       "model": "ADVAN Fleva V701",
       "size": "215/55R17",
       "prices": {
-        "pchome": 12420,
+        "pchome": 14003,
         "shopee": null,
         "yahoo": null,
         "ruten": null,
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-12T05:27:15.386934Z"
+      "updated_at": "2026-06-12T14:38:33.199889Z"
     },
     {
       "id": 10,
@@ -149,7 +149,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-12T05:27:17.982284Z"
+      "updated_at": "2026-06-12T14:38:36.762136Z"
     },
     {
       "id": 11,
@@ -164,7 +164,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-12T05:27:20.882229Z"
+      "updated_at": "2026-06-12T14:38:40.761879Z"
     },
     {
       "id": 12,
@@ -179,7 +179,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-12T05:27:25.320093Z"
+      "updated_at": "2026-06-12T14:38:43.791401Z"
     }
   ]
 }
