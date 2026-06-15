@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-14T13:42:51.641583Z",
+  "updated_at": "2026-06-15T06:18:58.966675Z",
   "tires": [
     {
       "id": 1,
@@ -14,7 +14,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-14T13:42:08.894545Z"
+      "updated_at": "2026-06-15T06:17:45.579085Z"
     },
     {
       "id": 2,
@@ -29,7 +29,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-14T13:42:11.983067Z"
+      "updated_at": "2026-06-15T06:17:48.913239Z"
     },
     {
       "id": 3,
@@ -44,7 +44,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-14T13:42:15.179591Z"
+      "updated_at": "2026-06-15T06:17:54.388198Z"
     },
     {
       "id": 4,
@@ -59,7 +59,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-14T13:42:18.572922Z"
+      "updated_at": "2026-06-15T06:17:58.062489Z"
     },
     {
       "id": 5,
@@ -74,7 +74,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-14T13:42:22.088283Z"
+      "updated_at": "2026-06-15T06:18:16.833948Z"
     },
     {
       "id": 6,
@@ -89,7 +89,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-14T13:42:25.225970Z"
+      "updated_at": "2026-06-15T06:18:25.780956Z"
     },
     {
       "id": 7,
@@ -104,7 +104,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-14T13:42:27.987926Z"
+      "updated_at": "2026-06-15T06:18:29.315795Z"
     },
     {
       "id": 8,
@@ -119,7 +119,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-14T13:42:31.035691Z"
+      "updated_at": "2026-06-15T06:18:33.068867Z"
     },
     {
       "id": 9,
@@ -134,7 +134,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-14T13:42:37.527470Z"
+      "updated_at": "2026-06-15T06:18:40.253517Z"
     },
     {
       "id": 10,
@@ -149,7 +149,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-14T13:42:45.584130Z"
+      "updated_at": "2026-06-15T06:18:51.352371Z"
     },
     {
       "id": 11,
@@ -164,7 +164,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-14T13:42:48.708459Z"
+      "updated_at": "2026-06-15T06:18:54.797410Z"
     },
     {
       "id": 12,
@@ -179,7 +179,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-14T13:42:51.641223Z"
+      "updated_at": "2026-06-15T06:18:58.966271Z"
     }
   ]
 }
