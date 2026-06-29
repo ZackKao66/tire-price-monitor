@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-29T05:25:40.154727Z",
+  "updated_at": "2026-06-29T15:33:31.543860Z",
   "tires": [
     {
       "id": 1,
@@ -7,14 +7,14 @@
       "model": "Pilot Sport 4",
       "size": "225/45R18",
       "prices": {
-        "pchome": 9972,
+        "pchome": 8576,
         "shopee": null,
         "yahoo": null,
         "ruten": null,
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T05:25:00.681034Z"
+      "updated_at": "2026-06-29T15:32:22.177028Z"
     },
     {
       "id": 2,
@@ -29,7 +29,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T05:25:04.344675Z"
+      "updated_at": "2026-06-29T15:32:25.944420Z"
     },
     {
       "id": 3,
@@ -44,7 +44,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T05:25:08.311855Z"
+      "updated_at": "2026-06-29T15:32:30.070916Z"
     },
     {
       "id": 4,
@@ -59,7 +59,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T05:25:12.041220Z"
+      "updated_at": "2026-06-29T15:32:33.611446Z"
     },
     {
       "id": 5,
@@ -74,7 +74,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T05:25:15.595290Z"
+      "updated_at": "2026-06-29T15:32:52.181478Z"
     },
     {
       "id": 6,
@@ -89,7 +89,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T05:25:19.279087Z"
+      "updated_at": "2026-06-29T15:32:55.162096Z"
     },
     {
       "id": 7,
@@ -104,7 +104,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T05:25:22.454447Z"
+      "updated_at": "2026-06-29T15:32:58.383247Z"
     },
     {
       "id": 8,
@@ -119,7 +119,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T05:25:25.401888Z"
+      "updated_at": "2026-06-29T15:33:17.449149Z"
     },
     {
       "id": 9,
@@ -134,7 +134,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T05:25:30.279660Z"
+      "updated_at": "2026-06-29T15:33:20.964859Z"
     },
     {
       "id": 10,
@@ -142,14 +142,14 @@
       "model": "PremiumContact 6",
       "size": "225/45R18",
       "prices": {
-        "pchome": 8776,
+        "pchome": 6976,
         "shopee": null,
         "yahoo": null,
         "ruten": null,
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T05:25:33.559994Z"
+      "updated_at": "2026-06-29T15:33:24.666326Z"
     },
     {
       "id": 11,
@@ -164,7 +164,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T05:25:36.872617Z"
+      "updated_at": "2026-06-29T15:33:28.100415Z"
     },
     {
       "id": 12,
@@ -179,7 +179,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T05:25:40.154416Z"
+      "updated_at": "2026-06-29T15:33:31.543497Z"
     }
   ]
 }
