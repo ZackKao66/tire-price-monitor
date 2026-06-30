@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-29T15:33:31.543860Z",
+  "updated_at": "2026-06-30T04:58:13.721830Z",
   "tires": [
     {
       "id": 1,
@@ -7,14 +7,14 @@
       "model": "Pilot Sport 4",
       "size": "225/45R18",
       "prices": {
-        "pchome": 8576,
+        "pchome": 9972,
         "shopee": null,
         "yahoo": null,
         "ruten": null,
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T15:32:22.177028Z"
+      "updated_at": "2026-06-30T04:57:43.385043Z"
     },
     {
       "id": 2,
@@ -29,7 +29,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T15:32:25.944420Z"
+      "updated_at": "2026-06-30T04:57:46.263799Z"
     },
     {
       "id": 3,
@@ -44,7 +44,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T15:32:30.070916Z"
+      "updated_at": "2026-06-30T04:57:49.053704Z"
     },
     {
       "id": 4,
@@ -59,7 +59,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T15:32:33.611446Z"
+      "updated_at": "2026-06-30T04:57:52.003622Z"
     },
     {
       "id": 5,
@@ -74,7 +74,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T15:32:52.181478Z"
+      "updated_at": "2026-06-30T04:57:54.544443Z"
     },
     {
       "id": 6,
@@ -89,7 +89,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T15:32:55.162096Z"
+      "updated_at": "2026-06-30T04:57:57.116362Z"
     },
     {
       "id": 7,
@@ -104,7 +104,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T15:32:58.383247Z"
+      "updated_at": "2026-06-30T04:57:59.745707Z"
     },
     {
       "id": 8,
@@ -119,7 +119,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T15:33:17.449149Z"
+      "updated_at": "2026-06-30T04:58:02.294687Z"
     },
     {
       "id": 9,
@@ -134,7 +134,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T15:33:20.964859Z"
+      "updated_at": "2026-06-30T04:58:04.709613Z"
     },
     {
       "id": 10,
@@ -149,7 +149,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T15:33:24.666326Z"
+      "updated_at": "2026-06-30T04:58:07.408276Z"
     },
     {
       "id": 11,
@@ -164,7 +164,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T15:33:28.100415Z"
+      "updated_at": "2026-06-30T04:58:10.594490Z"
     },
     {
       "id": 12,
@@ -179,7 +179,7 @@
         "leetire": null,
         "ttshop": null
       },
-      "updated_at": "2026-06-29T15:33:31.543497Z"
+      "updated_at": "2026-06-30T04:58:13.721510Z"
     }
   ]
 }
